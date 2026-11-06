@@ -13,9 +13,16 @@ public class WeaponData : ScriptableObject
     [Tooltip("Tir automatique si on garde le bouton appuyé.")]
     public bool automatic = false;
 
+    [Header("Effet spécial")]
+    [Tooltip("Si plus de 0 : la cible touchée est immobilisée ce nombre de secondes (taser).")]
+    public float immobilizeSeconds = 0f;
+
     [Header("Recul")]
     [Tooltip("Degrés dont la caméra se relève à chaque tir.")]
     public float cameraKickDegrees = 2.5f;
     [Tooltip("Distance dont l'arme recule visuellement, en mètres.")]
     public float gunKickDistance = 0.12f;
+
+    [Header("Apparence")]
+    public Color gunColor = Color.white;
 }

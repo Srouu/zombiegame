@@ -32,7 +32,9 @@ public static class SetupPlayerMenu
         if (shooter == null) shooter = Undo.AddComponent<PlayerShooter>(player.gameObject);
 
         SerializedObject so = new SerializedObject(shooter);
-        so.FindProperty("_weapon").objectReferenceValue = weapon;
+        SerializedProperty weapons = so.FindProperty("_weapons");
+        weapons.arraySize = 1;
+        weapons.GetArrayElementAtIndex(0).objectReferenceValue = weapon;
         so.FindProperty("_gunVisual").objectReferenceValue = gun;
         ThirdPersonCamera cam = Object.FindAnyObjectByType<ThirdPersonCamera>();
         so.FindProperty("_camera").objectReferenceValue = cam;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,8 +6,27 @@ using UnityEngine.InputSystem;
 // Les touches sont créées ici en code : rien à brancher dans l'inspecteur.
 // Le déplacement se fait par rapport à la direction de la caméra.
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IKnockable, IImmobilizable
 {
+    // Tous les joueurs de la scène (les zombies et les pièces cherchent le plus proche).
+    public static readonly List<PlayerController> All = new List<PlayerController>();
+
+    public static PlayerController Nearest(Vector3 position)
+    {
+        PlayerController best = null;
+        float bestDistance = float.MaxValue;
+        foreach (PlayerController player in All)
+        {
+            float distance = (player.transform.position - position).sqrMagnitude;
+            if (distance < bestDistance)
+            {
+                bestDistance = distance;
+                best = player;
+            }
+        }
+        return best;
+    }
+
     [Header("Déplacement")]
     [SerializeField] private float _walkSpeed = 6f;
     [SerializeField] private float _turnSpeed = 12f;
@@ -23,6 +43,21 @@ public class PlayerController : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _jumpAction;
     private float _verticalVelocity;
+    private Vector3 _impulse;
+    private float _immobilizedUntil;
+
+    // Poussée extérieure (explosion). Elle s'estompe toute seule.
+    public void AddImpulse(Vector3 velocity)
+    {
+        _impulse += velocity;
+        if (velocity.y > 0f) _verticalVelocity = Mathf.Max(_verticalVelocity, velocity.y);
+    }
+
+    // Immobilisé (taser) : ne peut plus se déplacer ni sauter.
+    public void Immobilize(float seconds)
+    {
+        _immobilizedUntil = Time.time + seconds;
+    }
 
     private void Awake()
     {
@@ -50,12 +85,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        All.Add(this);
         _moveAction.Enable();
         _jumpAction.Enable();
     }
 
     private void OnDisable()
     {
+        All.Remove(this);
         _moveAction.Disable();
         _jumpAction.Disable();
     }
@@ -73,8 +110,10 @@ public class PlayerController : MonoBehaviour
             right = Vector3.ProjectOnPlane(_cameraTransform.right, Vector3.up).normalized;
         }
 
+        bool immobilized = Time.time < _immobilizedUntil;
         Vector3 move = forward * input.y + right * input.x;
         if (move.sqrMagnitude > 1f) move.Normalize();
+        if (immobilized) move = Vector3.zero;
 
         // Le personnage se tourne vers la direction où il avance.
         if (move.sqrMagnitude > 0.001f)
@@ -87,12 +126,14 @@ public class PlayerController : MonoBehaviour
         if (_controller.isGrounded && _verticalVelocity < 0f)
             _verticalVelocity = -2f;
 
-        if (_controller.isGrounded && _jumpAction.WasPressedThisFrame())
+        if (!immobilized && _controller.isGrounded && _jumpAction.WasPressedThisFrame())
             _verticalVelocity = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
 
         _verticalVelocity += _gravity * Time.deltaTime;
 
-        Vector3 velocity = move * _walkSpeed + Vector3.up * _verticalVelocity;
+        Vector3 horizontalImpulse = new Vector3(_impulse.x, 0f, _impulse.z);
+        Vector3 velocity = move * _walkSpeed + horizontalImpulse + Vector3.up * _verticalVelocity;
         _controller.Move(velocity * Time.deltaTime);
+        _impulse = Vector3.Lerp(_impulse, Vector3.zero, 5f * Time.deltaTime);
     }
 }
