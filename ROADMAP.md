@@ -60,7 +60,7 @@ Critère de sortie : une scène avec un sol et un cube, lancée en mode Play san
 
 ### Phase 1 : prototype jouable
 - [x] Personnage 3e personne : déplacement, saut, caméra
-- [ ] Pistolet qui tire, avec recul
+- [x] Pistolet qui tire, avec recul
 - [ ] Zombie-capsule qui poursuit le joueur et subit des dégâts
 - [ ] Mort du zombie : particules et pièces ramassables
 - [ ] Baril explosif avec onde de choc

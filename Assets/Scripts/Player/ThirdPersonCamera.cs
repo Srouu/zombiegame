@@ -24,9 +24,20 @@ public class ThirdPersonCamera : MonoBehaviour
     [Header("Souris")]
     [SerializeField] private bool _lockCursor = true;
 
+    [Header("Recul d'arme")]
+    [Tooltip("Vitesse de retour de la caméra après un tir.")]
+    [SerializeField] private float _recoilRecovery = 10f;
+
     private InputAction _lookAction;
     private float _yaw;
     private float _pitch = 20f;
+    private float _recoil;
+
+    // Relève la caméra (appelé par l'arme à chaque tir).
+    public void AddRecoil(float degrees)
+    {
+        _recoil += degrees;
+    }
 
     private void Awake()
     {
@@ -86,7 +97,8 @@ public class ThirdPersonCamera : MonoBehaviour
         }
         _pitch = Mathf.Clamp(_pitch, _minPitch, _maxPitch);
 
-        Quaternion rotation = Quaternion.Euler(_pitch, _yaw, 0f);
+        _recoil = Mathf.Lerp(_recoil, 0f, _recoilRecovery * Time.deltaTime);
+        Quaternion rotation = Quaternion.Euler(_pitch - _recoil, _yaw, 0f);
         Vector3 focus = _target.position + Vector3.up * _targetHeight;
         transform.position = focus - rotation * Vector3.forward * _distance;
         transform.rotation = rotation;

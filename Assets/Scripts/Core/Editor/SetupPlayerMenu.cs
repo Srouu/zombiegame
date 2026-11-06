@@ -6,6 +6,41 @@ using UnityEngine;
 // Menu : ZOMBIEGAME > Créer le joueur dans la scène
 public static class SetupPlayerMenu
 {
+    [MenuItem("ZOMBIEGAME/Équiper le pistolet du joueur")]
+    private static void EquipPistol()
+    {
+        PlayerController player = Object.FindAnyObjectByType<PlayerController>();
+        if (player == null)
+        {
+            EditorUtility.DisplayDialog("ZOMBIEGAME", "Pas de joueur dans la scène.", "OK");
+            return;
+        }
+
+        WeaponData weapon = AssetDatabase.LoadAssetAtPath<WeaponData>("Assets/Weapons/Pistolet.asset");
+        Transform gun = player.transform.Find("Pistolet");
+        if (weapon == null || gun == null)
+        {
+            EditorUtility.DisplayDialog("ZOMBIEGAME", "Il manque l'arme (Assets/Weapons/Pistolet) ou le modèle (Player/Pistolet).", "OK");
+            return;
+        }
+
+        // Le modèle de l'arme ne doit pas gêner le joueur.
+        Collider gunCollider = gun.GetComponent<Collider>();
+        if (gunCollider != null) Object.DestroyImmediate(gunCollider);
+
+        PlayerShooter shooter = player.GetComponent<PlayerShooter>();
+        if (shooter == null) shooter = Undo.AddComponent<PlayerShooter>(player.gameObject);
+
+        SerializedObject so = new SerializedObject(shooter);
+        so.FindProperty("_weapon").objectReferenceValue = weapon;
+        so.FindProperty("_gunVisual").objectReferenceValue = gun;
+        ThirdPersonCamera cam = Object.FindAnyObjectByType<ThirdPersonCamera>();
+        so.FindProperty("_camera").objectReferenceValue = cam;
+        so.ApplyModifiedProperties();
+
+        EditorSceneManager.MarkSceneDirty(player.gameObject.scene);
+    }
+
     [MenuItem("ZOMBIEGAME/Créer le joueur dans la scène")]
     private static void CreatePlayer()
     {
