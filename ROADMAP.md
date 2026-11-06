@@ -59,7 +59,7 @@ Les niveaux terminés restent rejouables depuis le hub (farm de cosmétiques). U
 Critère de sortie : une scène avec un sol et un cube, lancée en mode Play sans erreur.
 
 ### Phase 1 : prototype jouable
-- [ ] Personnage 3e personne : déplacement, saut, caméra
+- [x] Personnage 3e personne : déplacement, saut, caméra
 - [ ] Pistolet qui tire, avec recul
 - [ ] Zombie-capsule qui poursuit le joueur et subit des dégâts
 - [ ] Mort du zombie : particules et pièces ramassables
