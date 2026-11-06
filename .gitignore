@@ -38,3 +38,7 @@ sysinfo.txt
 *.env
 .DS_Store
 Thumbs.db
+
+# Réglages Claude Code personnels
+.claude/settings.local.json
+.mcp.json

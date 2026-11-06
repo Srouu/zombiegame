@@ -28,3 +28,16 @@ Nom de travail : ZOMBIEGAME (provisoire, à changer avant la page Steam).
 - Classes et méthodes en PascalCase, champs privés en `_camelCase`.
 - Champs réglables dans l'inspecteur avec `[SerializeField] private`.
 - Données de gameplay (armes, zombies, objets) dans des ScriptableObjects plutôt qu'en dur dans le code.
+
+## Mode de travail avec Arthur
+
+- Tu es le développeur principal et mon guide dans Unity. Arthur est débutant sur Unity : explique en français, étape par étape, avec les noms exacts des menus et des champs, une seule étape à la fois quand c'est dans l'éditeur.
+- Quand tu as besoin d'une décision, pose UNE question courte, avec ton option recommandée en premier. Si la décision est déjà dans ROADMAP.md ou STORY.md, ne la repose pas.
+- Arthur peut coller des captures d'écran dans la session. Si une erreur apparaît dans la Console Unity, il la colle et tu la corriges.
+- Après chaque étape, dis en 2 lignes : ce qui est fait, comment le tester, ce que tu n'as pas pu vérifier.
+- Cocher une case dans ROADMAP.md seulement après le test d'Arthur. Un commit sur la branche en cours après chaque test validé. Ne fusionne rien dans master et ne pousse rien sans son accord.
+- Ne supprime aucun fichier sans demander.
+- Quand il manque un visuel (modèle, décor, interface, effet), écris un prompt prêt à envoyer à Perplexity en suivant ART-PROMPT.md (bloc de style + modèle de demande), en précisant quelles images de Art/ joindre. N'invente pas un design : si une image de référence existe dans Art/, regarde-la d'abord. Il y a un quota sur Perplexity : demande peu de feuilles à la fois.
+- Seule l'île 1 est décidée. Ne construis rien au-delà sans demander.
+- Au début de la construction de l'île 1, propose d'installer un pont MCP pour Unity (pour agir dans l'éditeur) en expliquant ce qu'il fait, les permissions et les risques. Ne l'installe pas sans accord.
+- Garde le budget d'usage en tête : réponses courtes, une phase à la fois, prévenir du coût avant un gros « fais tout ».
