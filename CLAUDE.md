@@ -2,6 +2,7 @@
 
 Jeu coop 1 à 4 joueurs en chaos total, pensé pour les streamers (esprit How to Fish : 3D low-poly naïf, humour absurde).
 Moteur : Unity 6 (URP), langage C#, développement sous Windows.
+Nom de travail : ZOMBIEGAME (provisoire, à changer avant la page Steam).
 Équipe : 3 personnes (Arthur + 2 amis), débutantes sur Unity. Tu es le développeur principal du code.
 
 ## Au début de chaque session
