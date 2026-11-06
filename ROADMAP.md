@@ -4,7 +4,7 @@
 
 ## État actuel
 
-- Phase en cours : **Phase 0 (mise en route)**
+- Phase en cours : **Phase 1 (prototype jouable)** (phase 0 terminée)
 - Cases cochées ci-dessous = terminé. Mets ce fichier à jour à la fin de chaque étape.
 - Voir `STORY.md` pour l'histoire de l'île 1, les 3 vagues choisies depuis la trappe du bus, le camp modélisé (achat avec « utiliser »), les réparations du bus avec nuage, le boss requin et la cagnotte commune.
 - L'inventaire d'armes a 2 cases au départ, +1 toutes les 2 maps, 4 au maximum. Les munitions sont affichées en haut à droite de l'écran, hors inventaire.
@@ -52,10 +52,10 @@ Les niveaux terminés restent rejouables depuis le hub (farm de cosmétiques). U
 ## Phases
 
 ### Phase 0 : mise en route
-- [ ] Projet Unity 6 (URP) créé et ouvert
-- [ ] Dépôt Git avec `.gitignore` Unity
-- [ ] Structure de dossiers : Scripts, Prefabs, Scenes, Art, Audio
-- [ ] Nom de travail du jeu choisi
+- [x] Projet Unity 6 (URP) créé et ouvert
+- [x] Dépôt Git avec `.gitignore` Unity
+- [x] Structure de dossiers : Scripts, Prefabs, Scenes, Art, Audio
+- [x] Nom de travail du jeu choisi
 Critère de sortie : une scène avec un sol et un cube, lancée en mode Play sans erreur.
 
 ### Phase 1 : prototype jouable
