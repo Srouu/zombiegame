@@ -61,11 +61,11 @@ Critère de sortie : une scène avec un sol et un cube, lancée en mode Play san
 ### Phase 1 : prototype jouable
 - [x] Personnage 3e personne : déplacement, saut, caméra
 - [x] Pistolet qui tire, avec recul
-- [ ] Zombie-capsule qui poursuit le joueur et subit des dégâts
-- [ ] Mort du zombie : particules et pièces ramassables
-- [ ] Baril explosif avec onde de choc
-- [ ] Compteur d'argent
-- [ ] Taser avec tir allié qui immobilise un coéquipier
+- [x] Zombie-capsule qui poursuit le joueur et subit des dégâts
+- [x] Mort du zombie : particules et pièces ramassables
+- [x] Baril explosif avec onde de choc
+- [x] Compteur d'argent
+- [x] Taser avec tir allié qui immobilise un coéquipier
 Critère de sortie : 10 minutes d'amusement seul dans l'arène.
 
 ### Phase 2 : tranche verticale (île déserte, coop locale)
